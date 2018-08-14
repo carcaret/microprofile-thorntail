@@ -1,0 +1,53 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'io.spring.gradle:dependency-management-plugin:1.0.6.RELEASE'
+        classpath 'io.thorntail:thorntail-gradle-plugin:2.0.0.Final'
+    }
+}
+
+plugins {
+    id 'java'
+    id 'application'
+}
+
+apply plugin: "io.spring.dependency-management"
+apply plugin: 'wildfly-swarm'
+
+group 'com.carcaret'
+version '1.0'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven {
+        url 'http://repository.jboss.org/nexus/content/groups/public/'
+    }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'io.thorntail:bom-all:2.0.0.Final'
+    }
+}
+
+dependencies {
+    compile 'io.thorntail:jaxrs'
+    compile 'io.thorntail:cdi'
+
+    compileOnly 'javax:javaee-api:8.0'
+}
+
+mainClassName = 'com.carcaret.Launcher'
+
+swarm {
+    properties {
+        swarm.http.port = 8080
+    }
+}

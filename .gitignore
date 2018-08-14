@@ -1,0 +1,10 @@
+.distribution
+.gradle
+.idea
+
+.DS_Store
+
+build
+target
+
+apache-tomee
