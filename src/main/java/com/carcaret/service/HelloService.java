@@ -1,4 +1,4 @@
-package com.carcaret;
+package com.carcaret.service;
 
 import javax.enterprise.context.ApplicationScoped;
 
